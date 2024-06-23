@@ -1,5 +1,16 @@
 <script setup>
+import {getCategoryAPI} from "@/apis/layout.js";
+import {ref} from "vue"
+const categoryList = ref([])
+//加async await 是异步的，并且调用返回promise对象的是promise对象的结果
+//不加async await 是同步的，并且调用返回promise对象的是promise对象本身
+const getCategory = async () => {
+  const res = await getCategoryAPI();
+  console.log(res)
+  categoryList.value = res.result;
+}
 
+getCategory()
 </script>
 
 <template>
@@ -9,12 +20,9 @@
         <RouterLink to="/">小兔鲜</RouterLink>
       </h1>
       <ul class="app-header-nav">
-        <li class="home">
-          <RouterLink to="/">首页</RouterLink>
+        <li class="home" v-for="item in categoryList"  :key="item.id">
+          <RouterLink to="/">{{item.name}}</RouterLink>
         </li>
-        <li> <RouterLink to="/">居家</RouterLink> </li>
-        <li> <RouterLink to="/">美食</RouterLink> </li>
-        <li> <RouterLink to="/">服饰</RouterLink> </li>
       </ul>
       <div class="search">
         <i class="iconfont icon-search"></i>
