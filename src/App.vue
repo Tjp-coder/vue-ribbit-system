@@ -7,9 +7,17 @@ console.log(res)
 </script>
 
 <template>
-  <el-button type="primary">我是 ElButton</el-button>
+  首页
+<!--  一级路由出口-->
+ <router-view></router-view>
+
+  <div class="test">
+    test scss
+  </div>
 </template>
 
-<style scoped>
-
+<style scoped lang="scss">
+.test{
+  color: $helpColor
+}
 </style>

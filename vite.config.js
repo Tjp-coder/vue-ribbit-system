@@ -18,7 +18,7 @@ export default defineConfig({
         }),
         Components({
             // 配置elementPlus 使用 sass样式配色系统
-            resolvers: [ElementPlusResolver({importStyle : "sass"})],
+            resolvers: [ElementPlusResolver({importStyle: "sass"})],
         }),
     ],
     resolve: {
@@ -35,6 +35,7 @@ export default defineConfig({
                 // 自动导入定制化样式文件进行样式覆盖
                 additionalData: `
           @use "@/styles/element/index.scss" as *;
+           @use "@/styles/var.scss" as *;
         `,
             }
         }
