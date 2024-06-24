@@ -1,6 +1,6 @@
-import { ref } from 'vue'
-import { defineStore } from 'pinia'
-import { getCategoryAPI } from '@/apis/layout'
+import {ref} from 'vue'
+import {defineStore} from 'pinia'
+import {getCategoryAPI} from '@/apis/layout'
 
 export const useCategoryStore = defineStore('category', () => {
     // 导航列表的数据管理
@@ -8,6 +8,8 @@ export const useCategoryStore = defineStore('category', () => {
     const categoryList = ref([])
 
     // action 获取导航数据的方法
+    //加async await 是异步的，并且调用返回promise对象的是promise对象的结果
+    //不加async await 是同步的，并且调用返回promise对象的是promise对象本身
     const getCategory = async () => {
         const res = await getCategoryAPI()
         categoryList.value = res.result
@@ -17,4 +19,4 @@ export const useCategoryStore = defineStore('category', () => {
         categoryList,
         getCategory
     }
-}
+})
