@@ -13,11 +13,11 @@ const router = createRouter({
             children: [
                 {
                     path: "category",
-                    component: import('@/views/Category/index.vue')
+                    component: ()=>import('@/views/Category/index.vue')
                 },
                 {
-                    path: "home",
-                    component: import('@/views/Home/index.vue')
+                    path: "",
+                    component: ()=>import('@/views/Home/index.vue')
                 },
             ]
         },

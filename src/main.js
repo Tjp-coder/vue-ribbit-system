@@ -7,7 +7,8 @@ import '@/styles/common.scss'
 
 
 const app = createApp(App);
-const pinia = createPinia();
+// const pinia = createPinia();
 app.use(router)
-app.use(pinia)
+app.use(createPinia())   //写法，解决vue dev-tools 不出现pinia
+// app.use(pinia)
 app.mount('#app')
