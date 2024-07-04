@@ -20,17 +20,21 @@ import HomePanel from "@/views/Home/components/HomePanel.vue";
   <HomeHotRecommend />
   <HomeProduct />
 
-<!--  测试面板组件-->
+
+<!--  测试面板组件
   <HomePanel title="新鲜好物" sub-title="新鲜出炉 品质靠谱">
+    &lt;!&ndash;插槽内容&ndash;&gt;
     <div>
       我是新鲜好物插槽的内容
     </div>
   </HomePanel>
 
   <HomePanel title="人气推荐" sub-title="人气爆款 不容错过">
+    &lt;!&ndash;插槽内容&ndash;&gt;
     <div>
       我是人气推荐插槽的内容
     </div>
-  </HomePanel>
+  </HomePanel>-->
+
 </template>
 
