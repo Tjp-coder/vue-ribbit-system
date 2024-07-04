@@ -12,7 +12,7 @@ const router = createRouter({
             component: Layout,
             children: [
                 {
-                    path: "category",
+                    path: "category/:id",
                     component: ()=>import('@/views/Category/index.vue')
                 },
                 {
