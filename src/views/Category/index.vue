@@ -1,38 +1,13 @@
 <!--分类页-->
 
 <script setup>
-import { getTopCategoryAPI } from '@/apis/category'
-import {onBeforeRouteUpdate, useRoute} from "vue-router";
-import {ref,onMounted} from "vue";
-
-const categoryData = ref({})
-const route = useRoute()
-const getCategory = async (id = route.params.id) => {
-  // 如何在setup中获取路由参数 useRoute() -> route 等价于this.$route
-  const res = await getTopCategoryAPI(id)
-  categoryData.value = res.result
-}
-onBeforeRouteUpdate(to => {
-  getCategory(to.params.id)
-})
-
-
-import {getBannerAPI} from "@/apis/home.js";
 import GoodsItem from "@/views/Home/components/GoodsItem.vue";
-const bannerList = ref([])
-const getBanner = async () => {
-  const res = await getBannerAPI({
-    distributionSite: '2'
-  })
-  bannerList.value = res.result
-}
-onMounted(()=>{
-  getBanner();
-})
 
-
-
-
+import {useBanner} from "@/views/Category/composables/useBanner.js";
+import {useCategory} from "@/views/Category/composables/useCategory.js";
+//抽象出逻辑代码，更符合组合式思想
+const  {categoryData} = useCategory()
+const  {bannerList} = useBanner()
 </script>
 
 
