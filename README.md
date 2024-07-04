@@ -109,6 +109,14 @@ Home页的组成有：
 
 
 
+加载图片：使用懒加载。useIntersectionObserver
+
+
+
+vue自定义指令。
+
+
+
 
 
 
@@ -121,9 +129,12 @@ Home页的组成有：
 
 课设加分：
 
-分页：可以在二级分类的页面里加
+分页：
 
-![image-20240704182525907](https://knowledge-1312726591.cos.ap-guangzhou.myqcloud.com/images/markdown%E5%9B%BE%E7%89%87/img/202407041825098.png)
+- 可以在二级分类的页面里加
+- 可以加在我的订单中
+
+
 
 文件上传：
 

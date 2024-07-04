@@ -24,7 +24,7 @@ onMounted(() => {
         <RouterLink :to="`/detail/${item.id}`">
           <img :src="item.picture" alt="" />
           <p class="name">{{ item.name }}</p>
-          <p class="price">&yen;{{ item.price }}</p>
+          <p class="price">&yen;{{ item.desc }}</p>
         </RouterLink>
       </li>
     </ul>
