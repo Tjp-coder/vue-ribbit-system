@@ -1,6 +1,6 @@
 import {ref} from 'vue'
 import {defineStore} from 'pinia'
-import {getCategoryAPI} from '@/apis/category.js'
+import {getCategoryAPI} from '@/apis/home.js'
 
 export const useCategoryStore = defineStore('category', () => {
     // 导航列表的数据管理

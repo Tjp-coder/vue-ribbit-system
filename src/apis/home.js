@@ -1,5 +1,18 @@
 import httpInstance from "@/utils/http.js";
 
+export function getCategoryAPI(){
+    return httpInstance(
+        {
+            url: 'home/category/head'
+        }
+    )
+}
+
+export function getBannerAPI(){
+    return httpInstance({
+        url:'/home/banner'
+    })
+}
 /**
  * @description: 获取新鲜好物
  * @param {*}

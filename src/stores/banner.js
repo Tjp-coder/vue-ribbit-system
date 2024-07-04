@@ -1,6 +1,6 @@
 import {ref} from 'vue'
 import {defineStore} from 'pinia'
-import {getBannerAPI} from "@/apis/banner.js";
+import {getBannerAPI} from "@/apis/home.js";
 
 export const useBannerStore = defineStore('banner',()=>{
     const bannerList = ref([])

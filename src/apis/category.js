@@ -1,9 +1,15 @@
-import httpInstance from "@/utils/http.js";
+import request from "@/utils/http.js";
 
-export function getCategoryAPI(){
-    return httpInstance(
-        {
-            url: 'home/category/head'
+/**
+ * @description: 获取分类数据
+ * @param {*} id 分类id
+ * @return {*}
+ */
+export const getTopCategoryAPI = (id) => {
+    return request({
+        url:'/category',
+        params:{
+            id
         }
-    )
+    })
 }
