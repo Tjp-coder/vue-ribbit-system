@@ -1,5 +1,4 @@
 <!--分类页-->
-
 <script setup>
 import GoodsItem from "@/views/Home/components/GoodsItem.vue";
 
@@ -10,9 +9,7 @@ const  {categoryData} = useCategory()
 const  {bannerList} = useBanner()
 </script>
 
-
 <template>
-
 <!--  顶部分类-->
   <div class="top-category">
     <div class="container m-top-20">
@@ -38,7 +35,7 @@ const  {bannerList} = useBanner()
         <h3>全部分类</h3>
         <ul>
           <li v-for="i in categoryData.children" :key="i.id">
-            <RouterLink to="/">
+            <RouterLink :to="`/category/sub/${i.id}`">
               <img :src="i.picture" />
               <p>{{ i.name }}</p>
             </RouterLink>

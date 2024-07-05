@@ -1,6 +1,7 @@
 import {ref} from 'vue'
 import {defineStore} from 'pinia'
 import {getCategoryAPI} from '@/apis/home.js'
+import {useCategory} from "@/views/Category/composables/useCategory.js";
 
 export const useCategoryStore = defineStore('category', () => {
     // 导航列表的数据管理
@@ -14,7 +15,6 @@ export const useCategoryStore = defineStore('category', () => {
         const res = await getCategoryAPI()
         categoryList.value = res.result
     }
-
     return {
         categoryList,
         getCategory
