@@ -21,9 +21,11 @@ const reqData = ref({
   pageSize: 20,
   sortField: 'latestGood'
 })
+const counts = ref(0)
+
 const getGoodList = async () => {
   const res = await getSubCategoryAPI(reqData.value)
-  console.log(res)
+  counts.value = res.result.counts
   goodList.value = res.result.items
 }
 onMounted(() => getGoodList())
@@ -36,8 +38,8 @@ const tabChange = () => {
   getGoodList()
 }
 
-// 加载更多
-const disabled = ref(false)
+// 滚动加载更多的逻辑代码
+/*const disabled = ref(false)
 const load = async () => {
   console.log('加载更多数据咯')
   // 获取下一页的数据
@@ -50,7 +52,14 @@ const load = async () => {
   if (res.result.items.length === 0) {
     disabled.value = true
   }
-}
+}*/
+
+
+// 分页回调
+const handlePageChange = (newPage) => {
+  reqData.value.page = newPage;
+  getGoodList();
+};
 
 </script>
 
@@ -71,10 +80,26 @@ const load = async () => {
         <el-tab-pane label="最高人气" name="highestPopularity"></el-tab-pane>
         <el-tab-pane label="评论最多" name="mostComments"></el-tab-pane>
       </el-tabs>
-      <div class="body" v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
-        <!-- 商品列表-->
+      <!--滚动版本-->
+      <!--<div class="body" v-infinite-scroll="load" :infinite-scroll-disabled="disabled">
+        &lt;!&ndash; 商品列表&ndash;&gt;
+        <GoodsItem v-for="goods in goodList" :goods="goods" :key="goods.id"/>
+      </div>-->
+
+      <!--分页版本-->
+      <div class="body">
+        <!-- 商品列表 -->
         <GoodsItem v-for="goods in goodList" :goods="goods" :key="goods.id"/>
       </div>
+
+      <!-- 分页条 -->
+      <el-pagination
+          @current-change="handlePageChange"
+          :current-page="reqData.page"
+          :page-size="reqData.pageSize"
+          layout="prev, pager, next"
+          :total="counts">
+      </el-pagination>
     </div>
   </div>
 
