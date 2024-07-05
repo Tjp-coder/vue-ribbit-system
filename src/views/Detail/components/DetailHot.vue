@@ -12,7 +12,7 @@ const props = defineProps({
   }
 })
 
-// 适配title 1 - 24小时热榜  2-周热榜   后端也有定义type的类型
+// 适配title 1 - 24小时热榜  2-周热榜   后端有定义type
 const TYPEMAP = {
   1: '24小时热榜',
   2: '周热榜'
