@@ -1,4 +1,5 @@
 import axios from 'axios'
+import {ElMessage} from "element-plus";
 
 // 创建axios实例
 const httpInstance = axios.create({
@@ -34,6 +35,13 @@ httpInstance.interceptors.response.use(
         if (error.response && error.response.status === 401) {
             // 处理未授权的情况，如跳转登录页
         }
+
+        // 统一错误提示
+        ElMessage({
+            type: 'warning',
+            message: error.response.data.message
+        })
+
         return Promise.reject(error);
     }
 )
