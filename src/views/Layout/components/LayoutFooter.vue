@@ -1,12 +1,45 @@
+<script setup>
+import { ref } from 'vue';
+import FeedbackDialog from '@/components/Dialog/FeedbackDialog.vue';
+
+const isFeedbackDialogVisible = ref(false);
+const feedbackDialogRef = ref(null);
+
+const openFeedbackDialog = () => {
+  console.log("问题反馈被点击了");
+  updateFeedbackDialogVisible(true);
+};
+
+const handleFeedbackSubmit = (content) => {
+  console.log('提交的问题内容:', content);
+  // 在这里处理提交的问题内容
+  try {
+    //发送请求，给后端处理反馈内容
+    console.log('富文本内容提交成功');
+  } catch (error) {
+    console.error('富文本内容提交失败');
+  }
+  updateFeedbackDialogVisible(false);
+};
+
+const updateFeedbackDialogVisible = (visible) => {
+  isFeedbackDialogVisible.value = visible;
+};
+
+</script>
+
 <template>
   <footer class="app_footer">
+    <feedbackDialog ref="feedbackDialogRef" :visible="isFeedbackDialogVisible" @update:visible="updateFeedbackDialogVisible" @submit="handleFeedbackSubmit" ></feedbackDialog>
     <!-- 联系我们 -->
     <div class="contact">
       <div class="container">
         <dl>
           <dt>客户服务</dt>
           <dd><i class="iconfont icon-kefu"></i> 在线客服</dd>
-          <dd><i class="iconfont icon-question"></i> 问题反馈</dd>
+          <dd @click="openFeedbackDialog()">
+            <i class="iconfont icon-question"></i> 问题反馈
+          </dd>
         </dl>
         <dl>
           <dt>关注我们</dt>
