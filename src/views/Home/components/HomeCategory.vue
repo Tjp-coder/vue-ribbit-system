@@ -1,6 +1,6 @@
 <script setup>
 //获取数据
-import {useCategoryStore} from "@/stores/category.js";
+import {useCategoryStore} from "@/stores/categoryStore.js";
 
 const categoryStore = useCategoryStore()
 
