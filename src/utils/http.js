@@ -1,5 +1,6 @@
 import axios from 'axios'
 import {ElMessage} from "element-plus";
+import {useUserStore} from "@/stores/userStore.js";
 
 // 创建axios实例
 const httpInstance = axios.create({
@@ -11,11 +12,12 @@ const httpInstance = axios.create({
 httpInstance.interceptors.request.use(
     function(config) {
         // 在发送请求之前做些什么，比如添加认证信息、处理请求参数等
-/*        // 示例：添加Token
-        const token = localStorage.getItem('token');
+        // 添加Token
+        const userStore = useUserStore()
+        const token = userStore.userInfo.token
         if (token) {
             config.headers.Authorization = `Bearer ${token}`;
-        }*/
+        }
         return config;
     },
     function(error) {
