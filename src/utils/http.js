@@ -1,6 +1,7 @@
 import axios from 'axios'
 import {ElMessage} from "element-plus";
 import {useUserStore} from "@/stores/userStore.js";
+import {useRouter} from "vue-router";
 
 // 创建axios实例
 const httpInstance = axios.create({
@@ -34,15 +35,21 @@ httpInstance.interceptors.response.use(
     },
     function(error) {
         // 对响应错误做点什么，比如错误处理、提示用户等
-        if (error.response && error.response.status === 401) {
-            // 处理未授权的情况，如跳转登录页
-        }
+
+        const userStore = useUserStore()
+        const router = useRouter();
 
         // 统一错误提示
         ElMessage({
             type: 'warning',
             message: error.response.data.message
         })
+
+        // 401 清除token信息并跳转到登录页面
+        if(error.response && error.response.status === 401){
+            userStore.clearUserInfo();
+            router.push('/login');
+        }
 
         return Promise.reject(error);
     }
