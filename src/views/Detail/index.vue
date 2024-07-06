@@ -1,9 +1,12 @@
 <script setup>
-import { getDetail } from '@/apis/detail'
-import { onMounted, ref } from 'vue'
-import { useRoute } from 'vue-router'
+import {getDetail} from '@/apis/detail'
+import {onMounted, ref} from 'vue'
+import {useRoute} from 'vue-router'
 
 import DetailHot from "@/views/Detail/components/DetailHot.vue";
+import {useCartStore} from "@/stores/cartStore.js";
+import {ElMessage} from "element-plus";
+
 const goods = ref({})
 const route = useRoute()
 const getGoods = async () => {
@@ -12,11 +15,37 @@ const getGoods = async () => {
 }
 onMounted(() => getGoods())
 
-
-
-const skuChance = (sku) => {
-
+const cartStore = useCartStore()
+// sku规格被操作时
+let skuObj = {}
+const skuChange = (sku) => {
   console.log(sku)
+  skuObj = sku;
+}
+
+const count = ref(1);
+const countChange = () => {
+  console.log(count)
+}
+// 添加购物车
+const addCart = () => {
+  if (skuObj.skuId) {
+    console.log(skuObj, cartStore.addCart)
+    // 规则已经选择  触发action
+    cartStore.addCart({
+      id: goods.value.id,
+      name: goods.value.name,
+      picture: goods.value.mainPictures[0],
+      price: goods.value.price,
+      count: count.value,
+      skuId: skuObj.skuId,
+      attrsText: skuObj.specsText,
+      selected: true
+    })
+  } else {
+    // 规格没有选择 提示用户
+    ElMessage.warning('请选择规格')
+  }
 }
 </script>
 
@@ -92,12 +121,12 @@ const skuChance = (sku) => {
                 </dl>
               </div>
               <!-- sku组件 -->
-              <XtxSku :goods = "goods" @chance = "skuChance"></XtxSku>
+              <XtxSku :goods="goods" @change="skuChange" />
               <!-- 数据组件 -->
-
+              <el-input-number v-model="count" @change="countChange" />
               <!-- 按钮组件 -->
               <div>
-                <el-button size="large" class="btn">
+                <el-button size="large" class="btn" @click="addCart">
                   加入购物车
                 </el-button>
               </div>
@@ -127,9 +156,9 @@ const skuChance = (sku) => {
             <!-- 24热榜+专题推荐 -->
             <div class="goods-aside">
               <!-- 24小时 -->
-              <DetailHot :hot-type="1" />
+              <DetailHot :hot-type="1"/>
               <!-- 周 -->
-              <DetailHot :hot-type="2" />
+              <DetailHot :hot-type="2"/>
             </div>
           </div>
         </div>
@@ -276,7 +305,7 @@ const skuChance = (sku) => {
       flex: 1;
       position: relative;
 
-      ~li::after {
+      ~ li::after {
         position: absolute;
         top: 10px;
         left: 0;
@@ -330,7 +359,7 @@ const skuChance = (sku) => {
       font-size: 18px;
       position: relative;
 
-      >span {
+      > span {
         color: $priceColor;
         font-size: 16px;
         margin-left: 10px;
@@ -364,7 +393,7 @@ const skuChance = (sku) => {
     }
   }
 
-  >img {
+  > img {
     width: 100%;
   }
 }
