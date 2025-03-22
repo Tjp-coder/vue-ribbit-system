@@ -23,8 +23,8 @@
 
 <script setup>
 import { ref, defineProps, defineEmits } from 'vue';
-import { QuillEditor } from '@vueup/vue-quill';  // 确保正确导入
-import '@vueup/vue-quill/dist/vue-quill.snow.css';  // 确保样式被引入
+import { QuillEditor } from '@vueup/vue-quill';
+import '@vueup/vue-quill/dist/vue-quill.snow.css';
 
 const props = defineProps({
   visible: Boolean
@@ -46,10 +46,6 @@ const submitFeedback = () => {
   closeDialog();
 };
 
-// 监视 visible 属性的变化
-// watch(() => props.visible, (newVal) => {
-//   console.log("Dialog visibility changed:", newVal);
-// });
 </script>
 
 <style scoped>

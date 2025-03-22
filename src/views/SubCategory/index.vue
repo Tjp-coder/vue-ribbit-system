@@ -54,13 +54,11 @@ const load = async () => {
   }
 }*/
 
-
 // 分页回调
 const handlePageChange = (newPage) => {
   reqData.value.page = newPage;
   getGoodList();
 };
-
 </script>
 
 <template>
